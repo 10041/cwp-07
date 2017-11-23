@@ -7,18 +7,14 @@ module.exports = class chk{
 		let propPath = "./checkList.json";
 		let defaultProps = JSON.parse(fs.readFileSync(propPath));
 		let urlProps = defaultProps.find(val => val.url === url);
-
-		console.log(url);
-		console.log(urlProps);
-
 		urlProps.props.forEach(val => {
 			result = props[val.name] === undefined ? false : true;
 			if (val.type === "number" && result){
-				result = typeof props[val.name] == "number";
+				result = typeof Number(props[val.name]) == "number";
 			} 
 			if(!result) urlProps.props.length = 0;
         });
-        console.log(result);
+        //console.log(result);
 		return result;
 	}
 }

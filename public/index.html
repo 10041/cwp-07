@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./site.css">
+    <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./app.js"></script>
+    <title>Articles</title>
+</head>
+<body>
+    <div id="sortOrder"></div>
+    <div>
+        <center>
+            <form method="GET" action="./form.html" id="newArtBttn">
+                <input type="submit" value="Add new article">
+            </form>
+        </center>
+        <br/>
+        <div id="articles">
+    </div>
+
+    <div id="pagination"/>
+    
+    <script type='text/javascript'>
+        $(function() {
+            getArticles();
+        });
+    </script>
+</body>
+</html>
