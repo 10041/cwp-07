@@ -7,6 +7,10 @@ module.exports = class chk{
 		let propPath = "./checkList.json";
 		let defaultProps = JSON.parse(fs.readFileSync(propPath));
 		let urlProps = defaultProps.find(val => val.url === url);
+
+		console.log(url);
+		console.log(urlProps);
+
 		urlProps.props.forEach(val => {
 			result = props[val.name] === undefined ? false : true;
 			if (val.type === "number" && result){

@@ -1,15 +1,47 @@
 [
 	{
 		"url": "/api/articles/readall",
-		"props": [
-			
-		]
+		"props": [ ]
+	},
+	{
+		"url": "/",
+		"props": []
+	},
+	{
+		"url": "/index.html",
+		"props": []
+	},
+	{
+		"url": "/form.html",
+		"props": []
+	},
+	{
+		"url": "/app.js",
+		"props": []
+	},
+	{
+		"url": "/form.js",
+		"props": []
+	},
+	{
+		"url": "/site.css",
+		"props": []
 	},
 	{
 		"url": "/api/logs",
-		"props": [
-			
-		]
+		"props": []
+	},
+	{
+		"url": "/jquery-3.2.1.min.js",
+		"props": []
+	},
+	{
+		"url": "/app.js",
+		"props": []
+	},
+	{
+		"url": "/site.css",
+		"props": []
 	},
 	{
 		"url": "/api/articles/read",

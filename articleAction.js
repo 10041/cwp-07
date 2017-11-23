@@ -25,7 +25,7 @@ module.exports = class articleAndCommentAction{
             .slice(firstIndex, lastIndex); // array start with zero
             resultArticles.sortByField(sortDefaultO, sortDefaultF);
             resultArticles.map(item => {
-                if (!includeDeps) delete item.comments;
+                if (!includeDeps && includeDeps != undefined) delete item.comments;
 				return item;
             });
             cb(null, {

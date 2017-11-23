@@ -17,6 +17,9 @@ const {
   deleteComment,
   requestInvalid
 } = require("./articleAction");
+const {
+  getFile
+} = require("./staticData");
 
 const handlers = {
     "/api/articles/readall": getAllArticles,
@@ -27,13 +30,22 @@ const handlers = {
 	"/api/comments/create": createComment,
   "/api/comments/delete": deleteComment,
   "/api/logs": getLog,
+
+  "/": getFile,
+	"/index.html": getFile,
+	"/form.html": getFile,
+	"/app.js":getFile,
+	"/form.js": getFile,
+  "/site.css": getFile,
+  "/jquery-3.2.1.min.js":getFile,
+
   "/api/error/400": requestInvalid
 };
 
 const server = http.createServer((req, res) => {
   parseBodyJson(req, (err, payload) => {
     const handler = getHandler(req.url);
-
+    console.log(req.url);
     handler(req, res, payload, (err, result) => {
       if (err) {
         res.statusCode = err.code;
@@ -46,7 +58,9 @@ const server = http.createServer((req, res) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.end( JSON.stringify(result) );
-    });
+    },
+    req.url
+  );
   });
 });
 
@@ -72,7 +86,7 @@ function parseBodyJson(req, cb) {
     body = Buffer.concat(body).toString();
     
     let params = (req.method === "GET") ? parseGetRequest(req) : JSON.parse(body);
-    Log(CreateLogObjFromReq(req.url, params));
+    //Log(CreateLogObjFromReq(req.url, params));
     if(!Check(req.url, params)){
       req.url = "/api/error/400";
       cb(error.INVALID_REQUEST, null);
