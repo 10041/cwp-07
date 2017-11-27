@@ -4,6 +4,10 @@
 		"props": [ ]
 	},
 	{
+		"url":"/favicon.ico",
+		"props":[]
+	},
+	{
 		"url": "/",
 		"props": []
 	},
