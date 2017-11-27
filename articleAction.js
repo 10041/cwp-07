@@ -8,21 +8,22 @@ module.exports = class articleAndCommentAction{
     static getAllArticles(req, res, payload, cb) 
     {
         const { page, limit, includeDeps, sortField, sortOrder } = payload;
-        const itemCount = unit.getInstance().articles.length;
-		const pages = Math.ceil(itemCount / limit);
-		const firstIndex = page * limit - limit;
-        const lastIndex = page * limit > itemCount ? itemCount : page * limit;
 
-        let sortDefaultF = sortField;
-        let sortDefaultO = sortOrder;
-        if(sortField == undefined) sortDefaultF = "date";
-        if(sortOrder == undefined) sortDefaultO = "desc";
+        let pageDefault = page === undefined ? "1": page;
+        let limitDefault = limit === undefined ? "10": limit;
+        let sortDefaultF = sortField === undefined ? "date":sortField;
+        let sortDefaultO = sortOrder === undefined ? "desc":sortOrder;
+
+        const itemCount = unit.getInstance().articles.length;
+		const pages = Math.ceil(itemCount / limitDefault);
+		const firstIndex = pageDefault * limitDefault - limitDefault;
+        const lastIndex = pageDefault * limitDefault > itemCount ? itemCount : pageDefault * limitDefault;
 
         if (itemCount < lastIndex) cb({ code: 500, message: "Incorrect page params" });
         
         try{
             let resultArticles = unit.getInstance().articles
-            .slice(firstIndex, lastIndex); // array start with zero
+            .slice(firstIndex, lastIndex);
             resultArticles.sortByField(sortDefaultO, sortDefaultF);
             resultArticles.map(item => {
                 if (!includeDeps && includeDeps != undefined) delete item.comments;
@@ -31,7 +32,7 @@ module.exports = class articleAndCommentAction{
             cb(null, {
                 items: resultArticles,
                 meta: {
-                    page,
+                    pageDefault,
                     pages,
                     count: itemCount,
                     limit
